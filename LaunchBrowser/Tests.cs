@@ -16,8 +16,6 @@ namespace AutomateWiki
             searchField.SendKeys("Selenium");
             IWebElement searchButton = driver.FindElement(By.XPath("//i[text()='Search']"));
             searchButton.Click();
-            driver.Quit();
         }
-
     }
 }
