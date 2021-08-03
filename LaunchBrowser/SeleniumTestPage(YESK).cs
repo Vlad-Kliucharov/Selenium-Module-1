@@ -18,8 +18,14 @@ namespace LaunchBrowser
             searchElement.Click();
             IWebElement goToArticle = driver.FindElement(By.XPath("//*[contains(text(),'CONTROLS PAGE')]"));
             goToArticle.Click();
+            IWebElement selectButtonQA = driver.FindElement(By.Name("qa"));
+            selectButtonQA.Click();
             IWebElement selectButtonBA = driver.FindElement(By.Name("ba"));
             selectButtonBA.Click();
+            IWebElement selectRadioLess1 = driver.FindElement(By.Id("lessone"));
+            selectRadioLess1.Click();
+            IWebElement selectMore5 = driver.FindElement(By.Id("morefive"));
+            selectMore5.Click();
         }
     }
 }
