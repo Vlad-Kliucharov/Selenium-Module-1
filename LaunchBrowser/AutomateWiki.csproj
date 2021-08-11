@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseClass.cs" />
     <Compile Include="SeleniumTestPageYESK.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
