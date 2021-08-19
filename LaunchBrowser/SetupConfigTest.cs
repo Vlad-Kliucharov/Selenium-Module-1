@@ -5,13 +5,13 @@ using System;
 
 namespace LaunchBrowser
 {
-    public abstract class BaseClass
+    public abstract class SetupConfigTest : CategoriesTest
     {
         protected IWebDriver driver;
 
         [SetUp]
 
-        public virtual void TestSetUp()
+        public virtual void TestSetUp() 
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
