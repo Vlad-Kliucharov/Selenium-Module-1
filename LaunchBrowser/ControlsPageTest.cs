@@ -5,6 +5,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 
 namespace LaunchBrowser
 {
@@ -30,14 +31,31 @@ namespace LaunchBrowser
             IWebElement controlsPage = driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
             controlsPage.Click();
 
-            //var elementPesantage = driver.FindElement(By.ClassName("elementor-counter-number"));
-            //WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, ConfigurationManager.AppSettings["ImplicitWait"]));
+            var elementPesantage = driver.FindElement(By.ClassName("elementor-counter-number"));
+            WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, ConfigurationManager.AppSettings["ImplicitWait"]));
 
-            var tableRows = driver.FindElement(By.XPath("*//table[1]/tbody/tr[1]"));
-
+            var tableRows = driver.FindElements(By.XPath("*//table/thead/../tbody"));
+            
             List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
 
+            for (int i = 0; i < tableRows.Count; i++)
+            {
+                itProjectTableRows add = new itProjectTableRows();
+                add.name = tableRows[i].FindElement(By.XPath(".//tr/td[1]"));
+                add.budget = tableRows[i].FindElement(By.XPath(".//tr/td[2]"));
+                itProjectTable.Add(add);
+            }
+
+            var companyName = "Facebook";
+            var company = itProjectTable.Find(c => c.name.Text == companyName);
+            var maxBudget = itProjectTable.Max(x => int.Parse(x.budget.Text));
+            if (company == null)
+            {
+                throw new NotFoundException($"Can't find '{companyName}' company shareholders table!");
+            }
+
+            Assert.That(company.budget.Text, Is.EqualTo(maxBudget.ToString()));
         }
 
         [TestCase(TestName = "Check-Box and Radio button validations on 'Control Page'")]
@@ -82,7 +100,7 @@ namespace LaunchBrowser
 
     public class itProjectTableRows
     {
-        public IWebElement Name { get; set; }
+        public IWebElement name { get; set; }
         public IWebElement budget { get; set; }
     }
 }

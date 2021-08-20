@@ -17,10 +17,10 @@ namespace LaunchBrowser
             driver.Manage().Window.Maximize();
         }
 
-        //[TearDown]
-        //public virtual void ShutDown()
-        //{
-        //    driver.Quit();
-        //}
+        [TearDown]
+        public virtual void ShutDown()
+        {
+            driver.Quit();
+        }
     }
 }
