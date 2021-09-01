@@ -10,16 +10,13 @@ using System.Linq;
 namespace LaunchBrowser
 {
     [TestFixture]
-
     class ControlsPageTest : SetupConfigTest
     {
         [TestCase(TestName = "Check 'ImplicitWait' on 'Control Page' for percentage")]
         [Category(Regression)]
-        [Obsolete]
         public void GoToPageControlsPage()
         {
             Actions hoverQAAUtomation = new Actions(driver);
-            Actions rightClick = new Actions(driver);
 
             driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
 
@@ -33,29 +30,38 @@ namespace LaunchBrowser
 
             var elementPesantage = driver.FindElement(By.ClassName("elementor-counter-number"));
             WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, ConfigurationManager.AppSettings["ImplicitWait"]));
+            waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, "100"));
 
-            var tableRows = driver.FindElements(By.XPath("*//table/thead/../tbody"));
-            
+            var tableRows = driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
+
             List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
 
             for (int i = 0; i < tableRows.Count; i++)
             {
                 itProjectTableRows add = new itProjectTableRows();
-                add.name = tableRows[i].FindElement(By.XPath(".//tr/td[1]"));
-                add.budget = tableRows[i].FindElement(By.XPath(".//tr/td[2]"));
+                add.name = tableRows[i].FindElement(By.XPath(".//td[1]"));
+                add.budget = tableRows[i].FindElement(By.XPath(".//td[2]"));
                 itProjectTable.Add(add);
             }
 
-            var companyName = "Facebook";
-            var company = itProjectTable.Find(c => c.name.Text == companyName);
-            var maxBudget = itProjectTable.Max(x => int.Parse(x.budget.Text));
-            if (company == null)
+            var companyNameFacebook = "Facebook";
+            var companyNameZoom = "Zoom";
+            var checkFaceBName = itProjectTable.Find(c => c.name.Text == companyNameFacebook);
+            var maxBudget = itProjectTable.Max(x => x.budgetNumber);
+            var checkZoomVal = itProjectTable.Find(z => z.name.Text == companyNameZoom);
+
+            if (checkFaceBName == null)
             {
-                throw new NotFoundException($"Can't find '{companyName}' company shareholders table!");
+                throw new NotFoundException($"Can't find '{companyNameFacebook}' company shareholders table!");
             }
 
-            Assert.That(company.budget.Text, Is.EqualTo(maxBudget.ToString()));
+            if (checkZoomVal == null)
+            {
+                throw new NotFoundException($"Can't find '{companyNameZoom}' company shareholders table!");
+            }
+
+            Assert.That(checkFaceBName.budgetNumber, Is.EqualTo(maxBudget));
+            Assert.That(checkZoomVal.budgetNumber, Is.EqualTo(11900));
         }
 
         [TestCase(TestName = "Check-Box and Radio button validations on 'Control Page'")]
@@ -102,5 +108,6 @@ namespace LaunchBrowser
     {
         public IWebElement name { get; set; }
         public IWebElement budget { get; set; }
+        public int budgetNumber => Convert.ToInt32(budget);
     }
 }
