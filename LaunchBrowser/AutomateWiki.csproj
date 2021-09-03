@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriesTest.cs" />
+    <Compile Include="ITProjectTableTest.cs" />
     <Compile Include="SetupConfigTest.cs" />
     <Compile Include="ControlsPageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

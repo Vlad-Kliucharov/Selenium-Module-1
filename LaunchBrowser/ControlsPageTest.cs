@@ -41,7 +41,10 @@ namespace LaunchBrowser
                 itProjectTableRows add = new itProjectTableRows();
                 add.name = tableRows[i].FindElement(By.XPath(".//td[1]"));
                 add.budget = tableRows[i].FindElement(By.XPath(".//td[2]"));
-                itProjectTable.Add(add);
+                if (!(string.IsNullOrEmpty(add.name.Text) && string.IsNullOrEmpty(add.budget.Text)))
+                {
+                    itProjectTable.Add(add);
+                }
             }
 
             var companyNameFacebook = "Facebook";
@@ -108,6 +111,6 @@ namespace LaunchBrowser
     {
         public IWebElement name { get; set; }
         public IWebElement budget { get; set; }
-        public int budgetNumber => Convert.ToInt32(budget);
+        public int budgetNumber => Convert.ToInt32(budget.Text);
     }
 }
