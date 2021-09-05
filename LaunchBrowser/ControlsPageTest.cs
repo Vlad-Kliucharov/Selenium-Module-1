@@ -20,9 +20,6 @@ namespace LaunchBrowser
 
             driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
 
-            IWebElement searchElements = driver.FindElement(By.XPath("//*[contains(text(),'Поиск элементов на странице')]"));
-            searchElements.Click();
-
             hoverQAAUtomation.MoveToElement(driver.FindElement(By.ClassName("qaautomation"))).Build().Perform();
 
             IWebElement controlsPage = driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
