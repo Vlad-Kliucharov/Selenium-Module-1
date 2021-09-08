@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriesTest.cs" />
+    <Compile Include="PageElements\TableIT projects.cs" />
+    <Compile Include="PageMapping\BasePage.cs" />
+    <Compile Include="PageMapping\PageControlPage.cs" />
     <Compile Include="PageMapping\PageWebDriver.cs" />
     <Compile Include="SetupConfigTest.cs" />
     <Compile Include="ControlsPageTest.cs" />

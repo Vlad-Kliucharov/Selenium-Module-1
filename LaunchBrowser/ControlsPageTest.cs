@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using LaunchBrowser.PageElements;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -20,35 +21,22 @@ namespace LaunchBrowser
 
             driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
 
+            var PageСourseWebDriver = new PageСourseWebDriver(driver);
+            var NextControlPage = PageСourseWebDriver.clickSearchElements();
             hoverQAAUtomation.MoveToElement(driver.FindElement(By.ClassName("qaautomation"))).Build().Perform();
-
-            IWebElement controlsPage = driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
-            controlsPage.Click();
+            NextControlPage.clickControlsPage();
 
             var elementPesantage = driver.FindElement(By.ClassName("elementor-counter-number"));
             WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, "100"));
 
-            var tableRows = driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
-
-            List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
-
-            for (int i = 0; i < tableRows.Count; i++)
-            {
-                itProjectTableRows add = new itProjectTableRows();
-                add.name = tableRows[i].FindElement(By.XPath(".//td[1]"));
-                add.budget = tableRows[i].FindElement(By.XPath(".//td[2]"));
-                if (!(string.IsNullOrEmpty(add.name.Text) && string.IsNullOrEmpty(add.budget.Text)))
-                {
-                    itProjectTable.Add(add);
-                }
-            }
+            var table = new TableIT_projects(driver);
 
             var companyNameFacebook = "Facebook";
             var companyNameZoom = "Zoom";
-            var checkFaceBName = itProjectTable.Find(c => c.name.Text == companyNameFacebook);
-            var maxBudget = itProjectTable.Max(x => x.budgetNumber);
-            var checkZoomVal = itProjectTable.Find(z => z.name.Text == companyNameZoom);
+            var checkFaceBName = table.GetRows().Find(c => c.name.Text == companyNameFacebook);
+            var maxBudget = table.GetRows().Max(x => x.budgetNumber);
+            var checkZoomVal = table.GetRows().Find(z => z.name.Text == companyNameZoom);
 
             if (checkFaceBName == null)
             {
@@ -102,12 +90,5 @@ namespace LaunchBrowser
             selectMore5.Click();
             Assert.AreEqual(true, selectMore5.Selected, "Radio button 'More than 5' is not selected – Assert Failed");
         }
-    }
-
-    public class itProjectTableRows
-    {
-        public IWebElement name { get; set; }
-        public IWebElement budget { get; set; }
-        public int budgetNumber => Convert.ToInt32(budget.Text);
     }
 }
