@@ -4,11 +4,11 @@ using System;
 
 namespace LaunchBrowser.PageMapping
 {
-    class PageControlPage
+    class PageControlPage : BasePage
     {
-        private IWebDriver _driver;
-        public PageControlPage(IWebDriver driver) => _driver = driver;
-        private IWebElement controlsPage => _driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
+
+        public PageControlPage(IWebDriver driver) : base(driver) { }
+        private IWebElement controlsPage => driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
 
         public void clickControlsPage()
         {

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace LaunchBrowser.PageMapping
 {
-    class BasePage
+    public abstract class BasePage: CategoriesTest
     {
-        private IWebDriver _driver;
+        protected IWebDriver driver;
 
-        public BasePage(IWebDriver driver) => _driver = driver;
+        public BasePage(IWebDriver driver) => this.driver = driver;
 
         public void mainPage()
         {
-            _driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
+            driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
         }
 
     }

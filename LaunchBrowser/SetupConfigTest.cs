@@ -1,19 +1,20 @@
-﻿using NUnit.Framework;
+﻿using LaunchBrowser.PageMapping;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 
 namespace LaunchBrowser
 {
-    public abstract class SetupConfigTest : CategoriesTest
+    public abstract class SetupConfigTest : BasePage
     {
-        protected IWebDriver driver;
+        public SetupConfigTest() : base(new ChromeDriver())
+        {}
 
         [SetUp]
-
         public virtual void TestSetUp() 
         {
-            driver = new ChromeDriver();
+            //driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
         }

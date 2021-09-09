@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace LaunchBrowser.PageElements
 {
-    public class TableIT_projects
+    public class TableITprojects
     {
         private IWebDriver _driver;
 
-        public TableIT_projects(IWebDriver driver) => _driver = driver;
+        public TableITprojects(IWebDriver driver) => _driver = driver;
 
         public List<itProjectTableRows> GetRows()
         {
@@ -29,6 +30,26 @@ namespace LaunchBrowser.PageElements
                     itProjectTable.Add(add);
                 }
             }
+
+            var companyNameFacebook = "Facebook";
+            var companyNameZoom = "Zoom";
+            var checkFaceBName = itProjectTable.Find(c => c.name.Text == companyNameFacebook);
+            var maxBudget = itProjectTable.Max(x => x.budgetNumber);
+            var checkZoomVal = itProjectTable.Find(z => z.name.Text == companyNameZoom);
+
+            if (checkFaceBName == null)
+            {
+                throw new NotFoundException($"Can't find '{companyNameFacebook}' company shareholders table!");
+            }
+
+            if (checkZoomVal == null)
+            {
+                throw new NotFoundException($"Can't find '{companyNameZoom}' company shareholders table!");
+            }
+
+            Assert.That(checkFaceBName.budgetNumber, Is.EqualTo(maxBudget));
+            Assert.That(checkZoomVal.budgetNumber, Is.EqualTo(11900));
+
             return itProjectTable;
         }
     }

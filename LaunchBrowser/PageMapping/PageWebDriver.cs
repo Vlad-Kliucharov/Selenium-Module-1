@@ -8,18 +8,16 @@ using System.Threading.Tasks;
 
 namespace LaunchBrowser
 {
-    class PageСourseWebDriver 
+    class PageСourseWebDriver : BasePage
     {
-        private IWebDriver _driver;
+        public PageСourseWebDriver(IWebDriver driver) : base(driver) { }
 
-        public PageСourseWebDriver(IWebDriver driver) => _driver = driver;
-
-        private IWebElement SearchElements => _driver.FindElement(By.XPath("//*[contains(text(),'Поиск элементов на странице')]"));
+        private IWebElement SearchElements => driver.FindElement(By.XPath("//*[contains(text(),'Поиск элементов на странице')]"));
 
         public PageControlPage clickSearchElements()
         {
             SearchElements.Click();
-            return new PageControlPage(_driver);
+            return new PageControlPage(driver);
         }
     }
 

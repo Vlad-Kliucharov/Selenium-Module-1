@@ -19,7 +19,7 @@ namespace LaunchBrowser
         {
             Actions hoverQAAUtomation = new Actions(driver);
 
-            driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
+            mainPage();
 
             var PageСourseWebDriver = new PageСourseWebDriver(driver);
             var NextControlPage = PageСourseWebDriver.clickSearchElements();
@@ -30,26 +30,7 @@ namespace LaunchBrowser
             WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, "100"));
 
-            var table = new TableIT_projects(driver);
-
-            var companyNameFacebook = "Facebook";
-            var companyNameZoom = "Zoom";
-            var checkFaceBName = table.GetRows().Find(c => c.name.Text == companyNameFacebook);
-            var maxBudget = table.GetRows().Max(x => x.budgetNumber);
-            var checkZoomVal = table.GetRows().Find(z => z.name.Text == companyNameZoom);
-
-            if (checkFaceBName == null)
-            {
-                throw new NotFoundException($"Can't find '{companyNameFacebook}' company shareholders table!");
-            }
-
-            if (checkZoomVal == null)
-            {
-                throw new NotFoundException($"Can't find '{companyNameZoom}' company shareholders table!");
-            }
-
-            Assert.That(checkFaceBName.budgetNumber, Is.EqualTo(maxBudget));
-            Assert.That(checkZoomVal.budgetNumber, Is.EqualTo(11900));
+         
         }
 
         [TestCase(TestName = "Check-Box and Radio button validations on 'Control Page'")]
