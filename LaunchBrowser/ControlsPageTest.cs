@@ -1,12 +1,10 @@
-﻿using LaunchBrowser.PageElements;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
+using LaunchBrowser.PageMapping;
 
 namespace LaunchBrowser
 {
@@ -19,7 +17,7 @@ namespace LaunchBrowser
         {
             Actions hoverQAAUtomation = new Actions(driver);
 
-            mainPage();
+            Menu.PageWebDriver();
 
             var PageСourseWebDriver = new PageСourseWebDriver(driver);
             var NextControlPage = PageСourseWebDriver.clickSearchElements();
@@ -29,8 +27,6 @@ namespace LaunchBrowser
             var elementPesantage = driver.FindElement(By.ClassName("elementor-counter-number"));
             WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(elementPesantage, "100"));
-
-         
         }
 
         [TestCase(TestName = "Check-Box and Radio button validations on 'Control Page'")]

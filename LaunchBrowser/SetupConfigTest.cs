@@ -14,7 +14,6 @@ namespace LaunchBrowser
         [SetUp]
         public virtual void TestSetUp() 
         {
-            //driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
         }
