@@ -1,46 +1,37 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 
 namespace LaunchBrowser.PageMapping
 {
 
     public class MainMenu
-    {
-        private IWebDriver _driver;
-        public MainMenu(IWebDriver driver)
         {
-            _driver = driver;
+            private IWebDriver _driver;
+            public MainMenu(IWebDriver driver)
+            {
+                _driver = driver;
+            }
+            public void PageMain()
+            {
+                _driver.Navigate().GoToUrl("https://yesk.com.ua/");
+            }
+            public void PageAboutMe()
+            {
+                _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-about/");
+            }
+            public void PageArticles()
+            {
+                _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-blog/");
+            }
+            public void PageContacts()
+            {
+                _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-contact/");
+            }
+            public void PageStudying()
+            {
+                _driver.Navigate().GoToUrl("https://yesk.com.ua/automation-learning/");
+            }
         }
-        public void PageMain()
-        {
-            _driver.Navigate().GoToUrl("https://yesk.com.ua/");
-        }
-        public void PageAboutMe()
-        {
-            _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-about/");
-        }
-        public void PageArticles()
-        {
-            _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-blog/");
-        }
-        public void PageContacts()
-        {
-            _driver.Navigate().GoToUrl("https://yesk.com.ua/705ea-contact/");
-        }
-        public void PageStudying()
-        {
-            _driver.Navigate().GoToUrl("https://yesk.com.ua/automation-learning/");
-        }
-        public void PageWebDriver()
-        {
-            _driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["URL"]);
-        }
-    }
-
-    public abstract class BasePage : CategoriesTest
+    public class BasePage
     {
         protected IWebDriver driver;
 

@@ -3,12 +3,13 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.Configuration;
 
 namespace LaunchBrowser
 {
-    public abstract class SetupConfigTest : BasePage
+    public abstract class SetupConfigurations : BasePage
     {
-        public SetupConfigTest() : base(new ChromeDriver())
+        public SetupConfigurations() : base(new ChromeDriver())
         {}
 
         [SetUp]

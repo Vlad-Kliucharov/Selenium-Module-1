@@ -3,10 +3,9 @@
 
 namespace LaunchBrowser.PageMapping
 {
-    class PageControlPage : BasePage
+    class ControlsPage : BasePage
     {
-
-        public PageControlPage(IWebDriver driver) : base(driver) { }
+        public ControlsPage(IWebDriver driver) : base(driver) { }
         private IWebElement controlsPage => driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
 
         public void clickControlsPage()

@@ -1,22 +1,20 @@
-﻿using NUnit.Framework;
+﻿using LaunchBrowser.PageMapping;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LaunchBrowser.PageElements
 {
-    public class TableITprojects
+    public class TableITprojects : BasePage
     {
-        private IWebDriver _driver;
 
-        public TableITprojects(IWebDriver driver) => _driver = driver;
+        public TableITprojects(IWebDriver driver) : base(driver) { }
 
         public List<itProjectTableRows> GetRows()
         {
-            var tableRows = _driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
+            var tableRows = driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
 
             List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
 

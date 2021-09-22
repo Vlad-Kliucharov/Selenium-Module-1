@@ -56,13 +56,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategoriesTest.cs" />
+    <Compile Include="Categories.cs" />
     <Compile Include="PageElements\TableIT projects.cs" />
     <Compile Include="PageMapping\BasePage.cs" />
-    <Compile Include="PageMapping\PageControlPage.cs" />
-    <Compile Include="PageMapping\PageWebDriver.cs" />
-    <Compile Include="SetupConfigTest.cs" />
-    <Compile Include="ControlsPageTest.cs" />
+    <Compile Include="PageMapping\ContactsPage.cs" />
+    <Compile Include="PageMapping\ControlsPage.cs" />
+    <Compile Include="PageMapping\MainPage.cs" />
+    <Compile Include="PageMapping\WebDriverPage.cs" />
+    <Compile Include="SetupConfigurations.cs" />
+    <Compile Include="MainTestMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
