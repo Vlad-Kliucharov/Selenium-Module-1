@@ -1,16 +1,21 @@
 ﻿using LaunchBrowser.PageMapping;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using System.Configuration;
 
 namespace LaunchBrowser
 {
-    class PageСourseWebDriver : BasePage
+    public class WebDriverPage : BasePage
     {
-        public PageСourseWebDriver(IWebDriver driver) : base(driver) { }
-
+        public WebDriverPage(IWebDriver driver) : base(driver) { }
         private IWebElement SearchElements => driver.FindElement(By.XPath("//*[contains(text(),'Поиск элементов на странице')]"));
-
-        public ControlsPage clickSearchElements()
+        private IWebElement HoverQAAULabel => driver.FindElement(By.ClassName("qaautomation"));
+        public void HoverOnQaautomationLable()
+        {
+            Actions HoverToAllArticles = new Actions(driver);
+            HoverToAllArticles.MoveToElement(HoverQAAULabel).Perform();
+        }
+        public ControlsPage ClickSearchElements()
         {
             SearchElements.Click();
             return new ControlsPage(driver);

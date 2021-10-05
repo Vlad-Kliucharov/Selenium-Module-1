@@ -1,16 +1,22 @@
-﻿using OpenQA.Selenium;
+﻿using LaunchBrowser.PageElements;
+using OpenQA.Selenium;
 
 
 namespace LaunchBrowser.PageMapping
 {
-    class ControlsPage : BasePage
+    public class ControlsPage : BasePage
     {
         public ControlsPage(IWebDriver driver) : base(driver) { }
-        private IWebElement controlsPage => driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
-
-        public void clickControlsPage()
+        private IWebElement GoToControlsPage => driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
+        public ControlsPage OpenontrolsPage()
         {
-            controlsPage.Click();
+            GoToControlsPage.Click();
+            return new ControlsPage(driver);
+        }
+        public void TableRawsValue()
+        {
+            var itTableResult = new TableITprojects(driver);
+            itTableResult.FilterValueItTable();
         }
     }
 }

@@ -9,14 +9,13 @@ namespace LaunchBrowser.PageElements
 {
     public class TableITprojects : BasePage
     {
-
         public TableITprojects(IWebDriver driver) : base(driver) { }
+
+        List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
 
         public List<itProjectTableRows> GetRows()
         {
             var tableRows = driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
-
-            List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
 
             for (int i = 0; i < tableRows.Count; i++)
             {
@@ -28,7 +27,11 @@ namespace LaunchBrowser.PageElements
                     itProjectTable.Add(add);
                 }
             }
+            return itProjectTable;
+        }
 
+        public List<itProjectTableRows> FilterValueItTable()
+        {
             var companyNameFacebook = "Facebook";
             var companyNameZoom = "Zoom";
             var checkFaceBName = itProjectTable.Find(c => c.name.Text == companyNameFacebook);
