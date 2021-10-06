@@ -16,10 +16,15 @@ namespace LaunchBrowser.PageElements
             Actions HoverToAllArticles = new Actions(_driver);
             HoverToAllArticles.MoveToElement(ElementMenuAllArticles).Perform();
         }
-        public IWebElement GoToConatcs => _driver.FindElement(By.Id("menu-item-135"));
-        public ContactsPage GoToContacts()
+        public IWebElement OpenContacs => _driver.FindElement(By.Id("menu-item-135"));
+        public ContactsPage GoToContacs()
         {
             return new ContactsPage(_driver);
+        }
+        public IWebElement OpenMainPage => _driver.FindElement(By.Id("menu-item-129"));
+        public MainPage GoToMainPage()
+        {
+            return new MainPage(_driver);
         }
         public MainMenu Menu => new MainMenu(_driver);
     }

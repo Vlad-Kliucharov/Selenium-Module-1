@@ -1,7 +1,6 @@
 ﻿using LaunchBrowser.PageMapping;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System.Configuration;
 
 namespace LaunchBrowser
 {
@@ -21,5 +20,4 @@ namespace LaunchBrowser
             return new ControlsPage(driver);
         }
     }
-
 }

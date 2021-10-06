@@ -1,7 +1,5 @@
-﻿using LaunchBrowser.PageElements;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System.Configuration;
 
 namespace LaunchBrowser.PageMapping
 {
