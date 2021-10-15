@@ -9,21 +9,19 @@ namespace LaunchBrowser.PageMapping
     public class ControlsPage : BasePage
     {
         public ControlsPage(IWebDriver driver) : base(driver) { }
-        private IWebElement GoToControlsPage => driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
+        private IWebElement GoToControlsPage => _driver.FindElement(By.XPath("//a[contains(text(),'CONTROLS PAGE')]"));
         public ControlsPage OpenControlsPage()
         {
             GoToControlsPage.Click();
-            return new ControlsPage(driver);
+            return new ControlsPage(_driver);
         }
-        public void TableRawsValue()
-        {
-            var itTableResult = new TableITprojects(driver);
-            itTableResult.FilterValueItTable();
-        }
-        private IWebElement QACheckBox => driver.FindElement(By.Name("qa"));
-        private IWebElement DEVCheckBox => driver.FindElement(By.Name("dev"));
-        private IWebElement BACheckBox => driver.FindElement(By.Name("ba"));
-        private IWebElement PMCheckBox => driver.FindElement(By.Name("pm"));
+
+        public TableITprojects ItProjectsTable = new TableITprojects(_driver);
+
+        public IWebElement QACheckBox => _driver.FindElement(By.Name("qa"));
+        private IWebElement DEVCheckBox => _driver.FindElement(By.Name("dev"));
+        private IWebElement BACheckBox => _driver.FindElement(By.Name("ba"));
+        private IWebElement PMCheckBox => _driver.FindElement(By.Name("pm"));
         public ControlsPage AssertsForCheckBox()
         {
             Assert.AreEqual(false, QACheckBox.Selected, "Check box 'QA Engineer' is selected – Assert Failed");
@@ -38,10 +36,10 @@ namespace LaunchBrowser.PageMapping
 
             Assert.AreEqual(false, PMCheckBox.Selected, "Check box 'Project Manager' is selected – Assert Failed");
 
-            return new ControlsPage(driver);
+            return new ControlsPage(_driver);
         }
-        private IWebElement LessoneRadioButton => driver.FindElement(By.Id("lessone"));
-        private IWebElement MorefiveRadioButton => driver.FindElement(By.Id("morefive"));
+        private IWebElement LessoneRadioButton => _driver.FindElement(By.Id("lessone"));
+        private IWebElement MorefiveRadioButton => _driver.FindElement(By.Id("morefive"));
         public ControlsPage AssertsForRadioBattons()
         {
             Assert.AreEqual(false, LessoneRadioButton.Selected, "Radio button 'Less than 1' is selected – Assert Failed");
@@ -52,15 +50,15 @@ namespace LaunchBrowser.PageMapping
             MorefiveRadioButton.Click();
             Assert.AreEqual(true, MorefiveRadioButton.Selected, "Radio button 'More than 5' is not selected – Assert Failed");
 
-            return new ControlsPage(driver);
+            return new ControlsPage(_driver);
         }
-        private IWebElement CheckProgressBar => driver.FindElement(By.ClassName("elementor-counter-number"));
+        private IWebElement CheckProgressBar => _driver.FindElement(By.ClassName("elementor-counter-number"));
         public ControlsPage WaitForLoader()
         {
-            WebDriverWait waitLoadPersantage = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait waitLoadPersantage = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
             waitLoadPersantage.Until(ExpectedConditions.TextToBePresentInElement(CheckProgressBar, "100"));
 
-            return new ControlsPage(driver);
+            return new ControlsPage(_driver);
         }
     }
 }

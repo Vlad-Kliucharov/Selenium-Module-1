@@ -6,14 +6,11 @@ namespace LaunchBrowser.PageMapping
 {
     public class BasePage
     {
-        private MainMenu _mainMenu;
-
-        protected IWebDriver driver;
-        public MainMenu Menu => _mainMenu;
+        public static IWebDriver _driver;
+        public MainMenu Menu => new MainMenu(_driver);
         public BasePage(IWebDriver driver)
         {
-            this.driver = driver;
-            _mainMenu = new MainMenu(driver);
+            _driver = driver;
         }
     }
 }

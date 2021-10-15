@@ -6,18 +6,18 @@ namespace LaunchBrowser.PageMapping
     public class MainPage : BasePage
     {
         public MainPage (IWebDriver driver) : base(driver) { }
-        private IWebElement ElementMenuAllArticles => driver.FindElement(By.Id("menu-item-130"));
-        private IWebElement GoToSubMenuCourseWebriver => driver.FindElement(By.Id("menu-item-470"));
+        private IWebElement ElementMenuAllArticles => _driver.FindElement(By.Id("menu-item-130"));
+        private IWebElement GoToSubMenuCourseWebriver => _driver.FindElement(By.Id("menu-item-470"));
         public WebDriverPage ClickOnCourseWebriver()
         {
-            Actions HoverToAllArticles = new Actions(driver);
+            Actions HoverToAllArticles = new Actions(_driver);
             HoverToAllArticles.MoveToElement(ElementMenuAllArticles).MoveToElement(GoToSubMenuCourseWebriver).Click().Build().Perform();
-            return new WebDriverPage(driver);
+            return new WebDriverPage(_driver);
         }
         public WebDriverPage OpenCourseWebriver()
         {
             GoToSubMenuCourseWebriver.Click();
-            return new WebDriverPage(driver);
+            return new WebDriverPage(_driver);
         }
     }
 }

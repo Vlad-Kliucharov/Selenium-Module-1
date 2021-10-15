@@ -7,25 +7,23 @@ namespace LaunchBrowser.PageElements
     public class MainMenu
     {
         private IWebDriver _driver;
-        public MainMenu(IWebDriver driver) {
+        public MainMenu(IWebDriver driver)
+        {
             _driver = driver;
         }
-        private IWebElement ElementMenuAllArticles => _driver.FindElement(By.Id("menu-item-130"));
-        public void HoverAllArticles()
+        private IWebElement AllArticlesElementMenu => _driver.FindElement(By.Id("menu-item-130"));
+        private IWebElement CourseWebriverElementMenu => _driver.FindElement(By.Id("menu-item-470"));
+
+        private void HoverAllArticles()
         {
             Actions HoverToAllArticles = new Actions(_driver);
-            HoverToAllArticles.MoveToElement(ElementMenuAllArticles).Perform();
+            HoverToAllArticles.MoveToElement(AllArticlesElementMenu).Perform();
         }
-        public IWebElement OpenContacs => _driver.FindElement(By.Id("menu-item-135"));
-        public ContactsPage GoToContacs()
+        public WebDriverPage GoToCourseWebriverPage()
         {
-            return new ContactsPage(_driver);
+            HoverAllArticles();
+            CourseWebriverElementMenu.Click();
+            return new WebDriverPage(_driver);
         }
-        public IWebElement OpenMainPage => _driver.FindElement(By.Id("menu-item-129"));
-        public MainPage GoToMainPage()
-        {
-            return new MainPage(_driver);
-        }
-        public MainMenu Menu => new MainMenu(_driver);
     }
 }

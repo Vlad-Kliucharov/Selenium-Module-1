@@ -1,5 +1,4 @@
-﻿using LaunchBrowser.PageMapping;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -7,15 +6,18 @@ using System.Linq;
 
 namespace LaunchBrowser.PageElements
 {
-    public class TableITprojects : BasePage
+    public class TableITprojects
     {
-        public TableITprojects(IWebDriver driver) : base(driver) { }
-
-        List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
-
+        private IWebDriver _driver;
+        public TableITprojects(IWebDriver driver)
+        {
+            _driver = driver;
+        }
         public List<itProjectTableRows> GetRows()
         {
-            var tableRows = driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
+            List<itProjectTableRows> itProjectTable = new List<itProjectTableRows>();
+
+            var tableRows = _driver.FindElements(By.XPath("//th[text()='Name']//following::tr"));
 
             for (int i = 0; i < tableRows.Count; i++)
             {
@@ -30,13 +32,15 @@ namespace LaunchBrowser.PageElements
             return itProjectTable;
         }
 
-        public List<itProjectTableRows> FilterValueItTable()
+        public List<itProjectTableRows> CheckBudgetsItTable()
         {
+            var table = GetRows();
+
             var companyNameFacebook = "Facebook";
             var companyNameZoom = "Zoom";
-            var checkFaceBName = itProjectTable.Find(c => c.name.Text == companyNameFacebook);
-            var maxBudget = itProjectTable.Max(x => x.budgetNumber);
-            var checkZoomVal = itProjectTable.Find(z => z.name.Text == companyNameZoom);
+            var checkFaceBName = table.Find(c => c.name.Text == companyNameFacebook);
+            var maxBudget = table.Max(x => x.budgetNumber);
+            var checkZoomVal = table.Find(z => z.name.Text == companyNameZoom);
 
             if (checkFaceBName == null)
             {
@@ -51,7 +55,7 @@ namespace LaunchBrowser.PageElements
             Assert.That(checkFaceBName.budgetNumber, Is.EqualTo(maxBudget));
             Assert.That(checkZoomVal.budgetNumber, Is.EqualTo(11900));
 
-            return itProjectTable;
+            return table;
         }
     }
     public class itProjectTableRows

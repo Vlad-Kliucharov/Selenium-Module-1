@@ -13,20 +13,20 @@ namespace LaunchBrowser
         [SetUp]
         public virtual void TestSetUp()
         {
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            _driver.Manage().Window.Maximize();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
         }
 
         public MainPage OpenHomePage()
         {
-            driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["MainPage"]);
-            return new MainPage(driver);
+            _driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["MainPage"]);
+            return new MainPage(_driver);
         }
 
         [TearDown]
         public virtual void ShutDown()
         {
-            driver.Quit();
+            _driver.Quit();
         }
     }
 }

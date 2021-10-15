@@ -10,7 +10,11 @@ namespace LaunchBrowser
         public void ExecutionOfTestMethods()
         {
             //var rows = ctrPage.Table.GetRows();
-            OpenHomePage().ClickOnCourseWebriver().ClickSearchElements().OpenControlsPage();
+        OpenHomePage()
+        .Menu.GoToCourseWebriverPage()
+        .ClickSearchElements()
+        .OpenControlsPage()
+        .ItProjectsTable.CheckBudgetsItTable();
         }
 
         [TestCase(TestName = "Check-Box and Radio button validations on 'Control Page'")]
@@ -18,7 +22,13 @@ namespace LaunchBrowser
         public void ContorPageValidation()
         {
             //TODO: Use Menu.MainPage();
-            OpenHomePage().ClickOnCourseWebriver().ClickSearchElements().OpenControlsPage().AssertsForCheckBox().AssertsForRadioBattons().WaitForLoader();
+        OpenHomePage()
+        .Menu.GoToCourseWebriverPage()
+        .ClickSearchElements()
+        .OpenControlsPage()
+        .AssertsForCheckBox()
+        .AssertsForRadioBattons()
+        .WaitForLoader();
         }
     }
 }
