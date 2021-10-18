@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaunchBrowser
 {
-    public abstract class CategoriesTest
+    public class Categories
     {
         public const string Validation = "Validation";
         public const string Regression = "Regression";
